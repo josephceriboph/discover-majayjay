@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover waterfalls, nature escapes, and nearby destinations around Majayjay, Laguna, Philippines.">
+  <meta name="theme-color" content="#123b32">
+  <title>Discover Majayjay | Waterfalls & Nature Escapes</title>
+  <style>
+    :root {
+      --forest: #123b32;
+      --forest-2: #1e5948;
+      --leaf: #d6edc7;
+      --cream: #f7f5ee;
+      --ink: #1d2924;
+      --muted: #66736c;
+      --white: #fff;
+      --line: #e2e7df;
+      --shadow: 0 14px 36px rgba(18,59,50,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.55; }
+    a { color: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(247,245,238,.94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(226,231,223,.85); }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 850; letter-spacing: -.04em; color: var(--forest); font-size: 1.12rem; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 13px; background: var(--forest); color: white; font-size: 20px; }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { text-decoration: none; font-size: .92rem; font-weight: 650; color: #41534a; }
+    nav a:hover { color: var(--forest-2); }
+    .nav-cta, .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 0; border-radius: 999px; padding: 12px 18px; background: var(--forest); color: white; text-decoration: none; font-weight: 750; cursor: pointer; transition: transform .2s, background .2s; }
+    .nav-cta:hover, .btn:hover { background: var(--forest-2); transform: translateY(-1px); }
+    .menu-toggle { display: none; background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; color: var(--forest); font-size: 1rem; }
+    .hero { position: relative; overflow: hidden; min-height: 570px; display: flex; align-items: center; color: white; background: linear-gradient(90deg, rgba(8,35,28,.84), rgba(8,35,28,.48) 52%, rgba(8,35,28,.12)), url('https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=2000&q=85') center/cover; }
+    .hero-content { max-width: 720px; padding: 88px 0 100px; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; text-transform: uppercase; letter-spacing: .16em; font-size: .76rem; font-weight: 800; color: #d6edc7; }
+    h1 { margin: 18px 0; font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: .99; letter-spacing: -.065em; }
+    .hero p { max-width: 570px; font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,.88); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn-light { background: white; color: var(--forest); }
+    .btn-light:hover { background: var(--leaf); }
+    .hero-note { margin-top: 26px; font-size: .83rem !important; color: rgba(255,255,255,.75) !important; }
+    .intro { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; padding: 76px 0 38px; align-items: end; }
+    .kicker { color: var(--forest-2); text-transform: uppercase; letter-spacing: .13em; font-size: .75rem; font-weight: 850; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; letter-spacing: -.05em; margin: 10px 0 16px; color: var(--forest); }
+    .intro p { margin: 0; color: var(--muted); max-width: 620px; }
+    .searchbox { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid var(--line); padding: 8px 8px 8px 16px; border-radius: 16px; box-shadow: var(--shadow); }
+    .searchbox input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; padding: 8px 0; font: inherit; }
+    .searchbox button { flex-shrink: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 9px; margin: 28px 0 22px; }
+    .filter { border: 1px solid #dce4d9; border-radius: 999px; padding: 9px 15px; background: transparent; color: #52645a; cursor: pointer; font-weight: 700; }
+    .filter.active, .filter:hover { background: var(--forest); color: white; border-color: var(--forest); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 78px; }
+    .card { background: white; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; box-shadow: 0 6px 20px rgba(18,59,50,.04); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card-image { height: 220px; position: relative; overflow: hidden; background: #dfe8dc; }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+    .card:hover .card-image img { transform: scale(1.04); }
+    .tag { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.93); color: var(--forest); border-radius: 999px; padding: 6px 10px; font-size: .75rem; font-weight: 800; }
+    .card-body { padding: 21px; display: flex; flex-direction: column; flex: 1; }
+    .card h3 { margin: 0 0 7px; color: var(--forest); font-size: 1.28rem; letter-spacing: -.025em; }
+    .location { color: var(--muted); font-size: .85rem; margin-bottom: 12px; }
+    .card p { color: #5f6d65; font-size: .94rem; margin: 0 0 18px; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; }
+    .btn-small { padding: 10px 13px; font-size: .84rem; }
+    .btn-outline { color: var(--forest); background: white; border: 1px solid #d6e0d5; }
+    .btn-outline:hover { color: white; border-color: var(--forest-2); }
+    .empty { display: none; padding: 30px; text-align: center; background: white; border-radius: 18px; color: var(--muted); margin-bottom: 50px; }
+    .map-section { background: #e9efe5; padding: 72px 0; }
+    .map-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 38px; align-items: center; }
+    .map-layout p { color: #5b6c61; }
+    .map-panel { border-radius: 24px; overflow: hidden; background: white; min-height: 360px; box-shadow: var(--shadow); }
+    .map-panel iframe { width: 100%; height: 390px; border: 0; display: block; }
+    .nearby { padding: 76px 0; }
+    .nearby-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 28px; }
+    .nearby-item { display: flex; gap: 18px; background: white; padding: 20px; border-radius: 20px; border: 1px solid var(--line); }
+    .nearby-icon { flex-shrink: 0; display: grid; place-items: center; width: 48px; height: 48px; background: var(--leaf); border-radius: 15px; font-size: 22px; }
+    .nearby-item h3 { margin: 0 0 4px; color: var(--forest); }
+    .nearby-item p { margin: 0 0 12px; color: var(--muted); font-size: .92rem; }
+    .text-link { color: var(--forest-2); font-weight: 800; text-decoration: none; }
+    .text-link:hover { text-decoration: underline; }
+    .callout { padding: 0 0 78px; }
+    .callout-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 34px; border-radius: 24px; background: var(--forest); color: white; }
+    .callout h2 { color: white; font-size: clamp(1.7rem, 3vw, 2.5rem); margin: 0 0 8px; }
+    .callout p { margin: 0; color: rgba(255,255,255,.75); max-width: 600px; }
+    footer { background: #0b2a23; color: white; padding: 34px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    footer p { margin: 5px 0 0; color: rgba(255,255,255,.65); font-size: .85rem; }
+    footer a { color: #d6edc7; text-decoration: none; }
+    .smallprint { font-size: .78rem; color: #738178; margin-top: 14px; }
+    @media (max-width: 850px) {
+      nav { gap: 13px; }
+      nav a { font-size: .83rem; }
+      .intro, .map-layout { grid-template-columns: 1fr; gap: 25px; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .nav { min-height: 66px; }
+      .menu-toggle { display: inline-block; }
+      nav { display: none; position: absolute; top: 65px; left: 0; right: 0; padding: 18px 22px 22px; background: var(--cream); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      nav.open { display: flex; }
+      nav a { padding: 7px 0; font-size: .95rem; }
+      .nav-cta { display: none; }
+      .hero { min-height: 540px; background-position: center; }
+      .hero-content { padding: 65px 0 72px; }
+      .cards, .nearby-grid { grid-template-columns: 1fr; }
+      .card-image { height: 230px; }
+      .intro { padding-top: 55px; }
+      .map-section, .nearby { padding: 55px 0; }
+      .map-panel iframe { height: 330px; }
+      .callout-inner, .footer-inner { align-items: flex-start; flex-direction: column; }
+      .callout-inner { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Discover Majayjay home"><span class="brand-mark">⌁</span> Discover Majayjay</a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open navigation">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="#spots">Tourist Spots</a>
+        <a href="#map">Explore Map</a>
+        <a href="#nearby">Nearby Trips</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="nav-cta" href="#spots">Explore places ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div class="hero-content">
+          <span class="eyebrow">🌿 Laguna, Philippines · Nature guide</span>
+          <h1>Find your next<br>nature escape.</h1>
+          <p>Discover waterfalls, cool spring waters, and beautiful places around Majayjay, Laguna — then get directions for your next adventure.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#spots">Explore tourist spots ↓</a>
+            <a class="btn" href="#map">Open the map ↗</a>
+          </div>
+          <p class="hero-note">Explore responsibly. Check local access, fees, weather, and safety guidance before traveling.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="spots">
+      <div class="intro">
+        <div>
+          <span class="kicker">The destination guide</span>
+          <h2>Waterfalls, springs<br>and local gems.</h2>
+          <p>Start with Majayjay's nature spots, then explore nearby destinations in Laguna and Quezon. Select a place to view it on the map or open driving directions in Google Maps.</p>
+        </div>
+        <form class="searchbox" id="searchForm" role="search">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Search tourist spots..." aria-label="Search tourist spots">
+          <button class="btn btn-small" type="submit">Search</button>
+        </form>
+      </div>
+
+      <div class="filters" aria-label="Filter tourist spots">
+        <button class="filter active" data-filter="all">All places</button>
+        <button class="filter" data-filter="Waterfall">Waterfalls</button>
+        <button class="filter" data-filter="Spring & resort">Springs & resorts</button>
+        <button class="filter" data-filter="Culture & pilgrimage">Culture & pilgrimage</button>
+      </div>
+
+      <div class="cards" id="spotCards">
+        <article class="card" data-name="Taytay Falls" data-category="Waterfall" data-search="taytay falls majayjay gagalot waterfall swimming forest">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1000&q=80" alt="Waterfall flowing into a green natural pool"><span class="tag">Waterfall</span></div>
+          <div class="card-body"><h3>Taytay Falls</h3><div class="location">📍 Brgy. Gagalot, Majayjay</div><p>A popular nature escape known for cool water, lush greenery, and a refreshing natural pool.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Taytay+Falls%2C+Majayjay%2C+Laguna&travelmode=driving">Get directions ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Taytay+Falls%2C+Majayjay%2C+Laguna">View map</a></div></div>
+        </article>
+        <article class="card" data-name="Bukal Falls" data-category="Waterfall" data-search="bukal falls majayjay liliw waterfall hike">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1000&q=80" alt="Sunlight filtering through a lush forest"><span class="tag">Waterfall</span></div>
+          <div class="card-body"><h3>Bukal Falls</h3><div class="location">📍 Majayjay / Liliw area</div><p>A forest waterfall adventure. Confirm the current trail, registration point, and access arrangements before your visit.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Bukal+Falls%2C+Laguna&travelmode=driving">Get directions ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bukal+Falls%2C+Laguna">View map</a></div></div>
+        </article>
+        <article class="card" data-name="Malinao" data-category="Spring & resort" data-search="malinao resort majayjay spring water swimming">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=80" alt="Clear flowing water in a natural setting"><span class="tag">Spring & resort</span></div>
+          <div class="card-body"><h3>Malinao</h3><div class="location">📍 Majayjay, Laguna</div><p>Add details about the exact Malinao destination, facilities, entrance fees, and operating hours once verified locally.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Malinao%2C+Majayjay%2C+Laguna&travelmode=driving">Get directions ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Malinao%2C+Majayjay%2C+Laguna">View map</a></div></div>
+        </article>
+        <article class="card" data-name="Sprite Falls" data-category="Spring & resort" data-search="sprite falls majayjay piit spring resort">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1000&q=80" alt="Water cascading over rocks surrounded by greenery"><span class="tag">Spring & resort</span></div>
+          <div class="card-body"><h3>Sprite Falls</h3><div class="location">📍 Majayjay, Laguna</div><p>A nature stop to include in your local guide. Verify the exact entrance or resort pin and current visitor information before publishing.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Sprite+Falls%2C+Majayjay%2C+Laguna&travelmode=driving">Get directions ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sprite+Falls%2C+Majayjay%2C+Laguna">View map</a></div></div>
+        </article>
+        <article class="card" data-name="Hulugan Falls" data-category="Waterfall" data-search="hulugan falls san salvador luisiana laguna waterfall">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1000&q=80" alt="Green mountain landscape with a nature trail"><span class="tag">Nearby waterfall</span></div>
+          <div class="card-body"><h3>Hulugan Falls</h3><div class="location">📍 Luisiana, Laguna</div><p>A nearby waterfall destination to consider for a longer nature trip. Check trail conditions and local guide requirements.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Majayjay%2C+Laguna&destination=Hulugan+Falls%2C+Luisiana%2C+Laguna&travelmode=driving">From Majayjay ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hulugan+Falls%2C+Luisiana%2C+Laguna">View map</a></div></div>
+        </article>
+        <article class="card" data-name="Kamay ni Hesus" data-category="Culture & pilgrimage" data-search="kamay ni hesus lucban quezon pilgrimage statue church">
+          <div class="card-image"><img loading="lazy" src="https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1000&q=80" alt="Church building and grounds"><span class="tag">Pilgrimage</span></div>
+          <div class="card-body"><h3>Kamay ni Hesus</h3><div class="location">📍 Lucban, Quezon</div><p>A well-known pilgrimage destination that can be added to a wider Laguna–Quezon itinerary.</p><div class="card-actions"><a class="btn btn-small" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Majayjay%2C+Laguna&destination=Kamay+ni+Hesus%2C+Lucban%2C+Quezon&travelmode=driving">From Majayjay ↗</a><a class="btn btn-small btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kamay+ni+Hesus%2C+Lucban%2C+Quezon">View map</a></div></div>
+        </article>
+      </div>
+      <div class="empty" id="emptyState">No places match your search. Try another name or category.</div>
+      <p class="smallprint">Visitor information can change. Confirm fees, opening hours, access, and safety conditions with local authorities or operators before traveling. Photos are illustrative and may not depict the exact attraction.</p>
+    </section>
+
+    <section class="map-section" id="map">
+      <div class="wrap map-layout">
+        <div>
+          <span class="kicker">Plan your visit</span>
+          <h2>Find your way<br>to the good stuff.</h2>
+          <p>Explore Majayjay on the map, then use the direction links on each attraction card to plan your drive. Google Maps can adjust the route based on your starting point and current conditions.</p>
+          <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=tourist+spots+Majayjay+Laguna">Explore Majayjay on Google Maps ↗</a>
+        </div>
+        <div class="map-panel">
+          <iframe title="Map of Majayjay, Laguna" loading="lazy" src="https://maps.google.com/maps?q=Majayjay%2C%20Laguna%2C%20Philippines&t=&z=12&ie=UTF8&iwloc=&output=embed" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap nearby" id="nearby">
+      <span class="kicker">Go a little further</span>
+      <h2>Nearby trips worth adding.</h2>
+      <p style="max-width:680px;color:var(--muted)">Help visitors build a longer itinerary by including places outside Majayjay, with clear labels so travelers know which town they're visiting.</p>
+      <div class="nearby-grid">
+        <article class="nearby-item"><div class="nearby-icon">💦</div><div><h3>Hulugan Falls</h3><p>Luisiana, Laguna · Waterfall and hiking destination.</p><a class="text-link" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Majayjay%2C+Laguna&destination=Hulugan+Falls%2C+Luisiana%2C+Laguna&travelmode=driving">Get directions ↗</a></div></article>
+        <article class="nearby-item"><div class="nearby-icon">🙏</div><div><h3>Kamay ni Hesus</h3><p>Lucban, Quezon · Pilgrimage and religious destination.</p><a class="text-link" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=Majayjay%2C+Laguna&destination=Kamay+ni+Hesus%2C+Lucban%2C+Quezon&travelmode=driving">Get directions ↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="wrap callout" id="about">
+      <div class="callout-inner">
+        <div><h2>Made for curious travelers.</h2><p>Discover Majayjay is a community-minded travel guide to waterfalls, springs, and nearby places in Laguna. Always respect nature and follow local guidance.</p></div>
+        <a class="btn btn-light" href="#spots">Start exploring ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><a class="brand" href="#home" style="color:white"><span class="brand-mark" style="background:#d6edc7;color:#123b32">⌁</span> Discover Majayjay</a><p>Waterfalls, springs & local adventures in Laguna, Philippines.</p></div>
+      <div><a href="#spots">Tourist spots</a> · <a href="#map">Map</a> · <a href="#about">About</a><p>© <span id="year"></span> Discover Majayjay · A local tourism guide concept</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = [...document.querySelectorAll('.card')];
+    const filters = [...document.querySelectorAll('.filter')];
+    const emptyState = document.getElementById('emptyState');
+    let activeFilter = 'all';
+
+    function updateCards() {
+      const term = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesText = (card.dataset.search + ' ' + card.dataset.name).toLowerCase().includes(term);
+        const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
+        const show = matchesText && matchesFilter;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visible++;
+      });
+      emptyState.style.display = visible ? 'none' : 'block';
+    }
+    filters.forEach(button => button.addEventListener('click', () => {
+      filters.forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      activeFilter = button.dataset.filter;
+      updateCards();
+    }));
+    document.getElementById('searchForm').addEventListener('submit', event => {
+      event.preventDefault();
+      updateCards();
+    });
+    searchInput.addEventListener('input', updateCards);
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    menuToggle.addEventListener('click', () => {
+      const open = mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+    mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
